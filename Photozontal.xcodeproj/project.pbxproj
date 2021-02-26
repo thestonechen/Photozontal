@@ -13,7 +13,6 @@
 		66CA498825D9271F000BFB5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66CA498725D9271F000BFB5F /* Assets.xcassets */; };
 		66CA498B25D9271F000BFB5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CA498925D9271F000BFB5F /* LaunchScreen.storyboard */; };
 		66D4703525DB9C45000DEA2C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4703425DB9C45000DEA2C /* Extensions.swift */; };
-		66D4704025E040A9000DEA2C /* MediaPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4703F25E040A9000DEA2C /* MediaPreviewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +24,6 @@
 		66CA498A25D9271F000BFB5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66CA498C25D9271F000BFB5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66D4703425DB9C45000DEA2C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		66D4703F25E040A9000DEA2C /* MediaPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +62,6 @@
 				66D4703425DB9C45000DEA2C /* Extensions.swift */,
 				66CA498925D9271F000BFB5F /* LaunchScreen.storyboard */,
 				66CA498C25D9271F000BFB5F /* Info.plist */,
-				66D4703F25E040A9000DEA2C /* MediaPreviewViewController.swift */,
 				66CA498725D9271F000BFB5F /* Assets.xcassets */,
 			);
 			path = Photozontal;
@@ -142,7 +139,6 @@
 				66CA498325D9271C000BFB5F /* CameraViewController.swift in Sources */,
 				66CA497F25D9271C000BFB5F /* AppDelegate.swift in Sources */,
 				66CA498125D9271C000BFB5F /* SceneDelegate.swift in Sources */,
-				66D4704025E040A9000DEA2C /* MediaPreviewViewController.swift in Sources */,
 				66D4703525DB9C45000DEA2C /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

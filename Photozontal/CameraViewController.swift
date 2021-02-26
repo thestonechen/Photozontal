@@ -215,12 +215,10 @@ class CameraViewController: UIViewController {
         
         do {
             var defaultVideoDevice: AVCaptureDevice?
-            
-            // Choose the back dual camera, if available, otherwise default to a wide angle camera.
             if let dualCameraDevice = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) {
                 defaultVideoDevice = dualCameraDevice
+                
             } else if let backCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) {
-                // If a rear dual camera is not available, default to the rear wide angle camera.
                 defaultVideoDevice = backCameraDevice
             }
             
@@ -231,8 +229,6 @@ class CameraViewController: UIViewController {
                 return
             }
             
-            // https://stackoverflow.com/questions/39563155/how-to-add-autofocus-to-avcapturesession-swift
-            // SHOULD MOVE THIS ELSEWHERE?
             if videoDevice.isFocusModeSupported(.continuousAutoFocus) {
                 try! videoDevice.lockForConfiguration()
                 videoDevice.focusMode = .continuousAutoFocus
@@ -277,14 +273,6 @@ class CameraViewController: UIViewController {
             self.view.layer.insertSublayer(self.cameraPreviewLayer!, at: 0)
         }
         session.commitConfiguration()
-    }
-    
-    // Delete this later
-    func displayCapturedPhoto(capturedPhoto: UIImage) {
-        let vc = MediaPreviewViewController(image: capturedPhoto)
-        let navigationController = UINavigationController(rootViewController: vc)
-        navigationController.modalPresentationStyle = .fullScreen
-        self.present(navigationController, animated: true, completion: nil)
     }
     
     func getVideoOrientation() -> AVCaptureVideoOrientation {
@@ -335,17 +323,31 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
                 self.view.layer.opacity = 1
             }
         }
-        
-        
-        // SHOULD BE HANDLED BY A SEPARATE CLASS. Maybe a ImageSaver class?
-        //UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveError), nil) // need to handle if rejects saving
-        // Separate class to handle saving image?
-        
-       self.displayCapturedPhoto(capturedPhoto: image)
+    
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveError), nil)
     }
     
     @objc
     func saveError(_ image: UIImage, didFinishSavingWithError: Error?, contextInfo: UnsafeRawPointer) {
-        print("SAVE FINISHED")
+        if didFinishSavingWithError != nil {
+            DispatchQueue.main.async {
+                let message = NSLocalizedString("Photozontal doesn't have permission to save to Photos, please change the permission in settings", comment: "")
+                let alertController = UIAlertController(title: "Photozontal", message: message, preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""),
+                                                        style: .cancel,
+                                                        handler: nil))
+                
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: ""),
+                                                        style: .`default`,
+                                                        handler: { _ in
+                                                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
+                                                                                      options: [:],
+                                                                                      completionHandler: nil)
+                                                        }))
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
 }
